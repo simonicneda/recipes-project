@@ -72,3 +72,18 @@
   color: #999;
   margin: 0;
 }
+
+.not-found {
+  text-align: center;
+  padding: 40px;
+}
+
+.edit-btn {
+  margin-top: 12px;
+  padding: 8px 16px;
+  border: 1px solid #40bd78;
+  background: white;
+  color: #40bd78;
+  border-radius: 6px;
+  cursor: pointer;
+}

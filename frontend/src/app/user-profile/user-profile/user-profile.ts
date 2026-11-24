@@ -9,7 +9,9 @@ import { User } from '../user.model';
   templateUrl: './user-profile.html',
 })
 export class UserProfile implements OnInit {
-  user!: User;
+  user: User | null = null;
+  isOwnProfile = true;   //da li gledam svoj profil
+  notFound = false;   //da li korisnik ne postoji
 
   private myProfile: User = {
     id: 1,
@@ -40,15 +42,21 @@ export class UserProfile implements OnInit {
 
   constructor(private route: ActivatedRoute) {}
 
-  ngOnInit(): void {
+    ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
-      if (id) {
-        const found = this.otherProfiles.find(u => u.id === Number(id));
-        this.user = found ?? this.myProfile;
-      } else {
+
+      if (!id) {
         this.user = this.myProfile;
+        this.isOwnProfile = true;
+        this.notFound = false;
+        return;
       }
+
+      const found = this.otherProfiles.find(u => u.id === Number(id)); 
+      this.isOwnProfile = false;
+      this.user = found ?? null;  //ovo je ako ne nadje korisnika onda se prikazuje porukaa
+      this.notFound = !found;
     });
   }
 }
