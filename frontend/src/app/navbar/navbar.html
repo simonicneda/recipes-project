@@ -1,0 +1,17 @@
+<nav class="navbar">
+    <a routerLink="/" class="logo">RecipeApp</a>
+
+    <button class="menu-button" (click)="toggleMenu()">☰</button>
+
+    <div class="nav-links" [class.open]="menuOpen">
+        @if(role==='user'){
+            <a routerLink="/" (click)="menuOpen = false">Početna</a>
+            <a routerLink="/recipes" (click)="menuOpen = false">Recepti</a>
+            <a routerLink="/favorites" (click)="menuOpen = false">Omiljeni</a>
+            <a routerLink="/profile" (click)="menuOpen = false">Profil</a>
+        }
+        @if(role==='admin'){
+            <a routerLink="/admin" (click)="menuOpen = false">Administracija</a>
+        }
+    </div>
+</nav>
