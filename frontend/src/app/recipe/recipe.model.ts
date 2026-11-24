@@ -2,6 +2,7 @@ export interface Recipe {
   id: number;
   name: string;
   author: string;
+  created:Date;
   mealType: string;
   dishType: string;
   dietType: string;

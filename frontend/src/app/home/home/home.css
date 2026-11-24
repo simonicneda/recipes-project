@@ -78,6 +78,10 @@
   padding: 55px 8%;
 }
 
+.latest-section {
+  padding: 55px 8%;
+}
+
 .section-heading {
   margin-bottom: 30px;
 }
@@ -204,6 +208,32 @@
 
 .empty-message {
   color: #777;
+}
+.recipe-selection {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.recipe-selection label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.recipe-selection select {
+    padding: 10px 35px 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+.recipe-selection select:focus {
+    border-color: #40bd78;
 }
 
 

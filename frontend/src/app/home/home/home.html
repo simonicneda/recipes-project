@@ -13,54 +13,113 @@
         </div>
     </section>
 
-    <section class="popular-section">
-        <div class="section-heading">
-            <div>
-                <h2>Popularni recepti</h2>
-                <p>Recepti sa najboljim ocenama u poslednjih 30 dana.</p>
+    <div class="recipe-selection">
+        <label for="recipe-sort">Prikaži:</label>
+
+        <select id="recipe-sort" (change)="selected = $any($event.target).value">
+            <option value="popular">Popularni recepti</option>
+            <option value="latest">Najnoviji recepti</option>
+        </select>
+    </div>
+
+    @if (selected === 'popular') {
+        <section class="popular-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Popularni recepti</h2>
+                    <p>Recepti sa najboljim ocenama u poslednjih 30 dana.</p>
+                </div>
             </div>
-        </div>
 
-        <div class="recipe-grid">
-            @for(item of popularRecipes; track item.recipe.id){
-                <article class="recipe-card">
-                    <div class="image-container">
-                        <img [src]="item.recipe.imageUrl" [alt]="item.recipe.name"/>
+            <div class="recipe-grid">
+                @for(item of popularRecipes; track item.recipe.id){
+                    <article class="recipe-card">
+                        <div class="image-container">
+                            <img [src]="item.recipe.imageUrl" [alt]="item.recipe.name"/>
 
-                        <span class="meal-badge">{{item.recipe.mealType}}</span>
-                    </div>
-
-                    <div class="recipe-content">
-                        <div class="recipe-meta">
-                            <span>{{ item.recipe.dishType }}</span>
-                            <span>{{ item.recipe.dietType }}</span>
+                            <span class="meal-badge">{{item.recipe.mealType}}</span>
                         </div>
 
-                        <h3>{{ item.recipe.name }}</h3>
+                        <div class="recipe-content">
+                            <div class="recipe-meta">
+                                <span>{{ item.recipe.dishType }}</span>
+                                <span>{{ item.recipe.dietType }}</span>
+                            </div>
 
-                        <p class="author">Autor: {{ item.recipe.author }}</p>
+                            <h3>{{ item.recipe.name }}</h3>
 
-                        <div class="recipe-details">
-                            <span>◷ {{ item.recipe.preparationTime }} min</span>
-                            <span>♙ {{ item.recipe.servings }} porcija</span>
+                            <p class="author">Autor: {{ item.recipe.author }}</p>
+
+                            <div class="recipe-details">
+                                <span>◷ {{ item.recipe.preparationTime }} min</span>
+                                <span>♙ {{ item.recipe.servings }} porcija</span>
+                            </div>
+
+                            <div class="allergens">
+                                @for (allergen of item.recipe.allergens; track allergen) {
+                                    <span>{{ allergen }}</span>
+                                }
+                            </div>
+
+                            <div class="rating">
+                                <span class="star">★</span>
+                                <strong>{{ item.averageRating | number:'1.1-1' }}</strong>
+                                <span>({{ item.ratingCount }} ocena)</span>
+                            </div>
+                        </div>
+                    </article>
+                }@empty{
+                    <p class="empty-message">Trenutno nema popularnih recepata.</p>
+                }
+            </div>
+        </section>
+    }
+
+    @if (selected === 'latest') {
+        <section class="latest-section">
+            <div class="section-heading">
+                <div>
+                    <h2>Najnoviji recepti</h2>
+                    <p>Budite uvek u trendu sa najukusnijim jelima.</p>
+                </div>
+            </div>
+
+            <div class="recipe-grid">
+                @for(item of latestRecipes; track item.id){
+                    <article class="recipe-card">
+                        <div class="image-container">
+                            <img [src]="item.imageUrl" [alt]="item.name"/>
+
+                            <span class="meal-badge">{{item.mealType}}</span>
                         </div>
 
-                        <div class="allergens">
-                            @for (allergen of item.recipe.allergens; track allergen) {
-                                <span>{{ allergen }}</span>
-                            }
-                        </div>
+                        <div class="recipe-content">
+                            <div class="recipe-meta">
+                                <span>{{ item.dishType }}</span>
+                                <span>{{ item.dietType }}</span>
+                            </div>
 
-                        <div class="rating">
-                            <span class="star">★</span>
-                            <strong>{{ item.averageRating | number:'1.1-1' }}</strong>
-                            <span>({{ item.ratingCount }} ocena)</span>
+                            <h3>{{ item.name }}</h3>
+
+                            <p class="author">Autor: {{ item.author }}</p>
+
+                            <div class="recipe-details">
+                                <span>◷ {{ item.preparationTime }} min</span>
+                                <span>♙ {{ item.servings }} porcija</span>
+                            </div>
+
+                            <div class="allergens">
+                                @for (allergen of item.allergens; track allergen) {
+                                    <span>{{ allergen }}</span>
+                                }
+                            </div>
+
                         </div>
-                    </div>
-                </article>
-            }@empty{
-                <p class="empty-message">Trenutno nema popularnih recepata.</p>
-            }
-        </div>
-    </section>
+                    </article>
+                }@empty{
+                    <p class="empty-message">Trenutno nema recepata.</p>
+                }
+            </div>
+        </section>
+    }
 </div>

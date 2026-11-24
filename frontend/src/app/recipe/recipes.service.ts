@@ -8,6 +8,7 @@ export class RecipeService{
       id: 1,
       name: 'Kremasta pasta sa pečurkama',
       author: 'Ana',
+      created: new Date('2026-11-11'),
       mealType: 'Ručak',
       dishType: 'Testenina',
       dietType: 'Vegetarijanska',
@@ -25,6 +26,7 @@ export class RecipeService{
       id: 2,
       name: 'Američke palačinke',
       author: 'Marko',
+      created: new Date('2026-11-12'),
       mealType: 'Doručak',
       dishType: 'Palačinke',
       dietType: 'Vegetarijanska',
@@ -43,6 +45,7 @@ export class RecipeService{
       id: 3,
       name: 'Mediteranska salata',
       author: 'Milica',
+      created: new Date('2026-11-13'),
       mealType: 'Ručak',
       dishType: 'Salata',
       dietType: 'Vegetarijanska',
@@ -60,6 +63,7 @@ export class RecipeService{
       id: 4,
       name: 'Čokoladni kolač',
       author: 'Jovana',
+      created: new Date('2026-11-11'),
       mealType: 'Desert',
       dishType: 'Kolač',
       dietType: 'Vegetarijanska',
@@ -90,5 +94,9 @@ export class RecipeService{
             return {recipe, averageRating:total/recentRatings.length, ratingCount:recentRatings.length};
 
         }).filter((item):item is PopularRecipe => item!==null).sort((a,b) => b.averageRating-a.averageRating);
+    }
+
+    getLatestRecipes():Recipe[]{
+        return this.recipes.sort((a,b) => new Date(b.created).getTime() - new Date(a.created).getTime())
     }
 }
