@@ -1,14 +1,16 @@
 <div class="profile-container">
   <div class="profile-card">
-    
+
     <div class="profile-header">
-      <img class="profile-image" src="https://i.pravatar.cc/150" alt="Profilna slika" />
-      
+      <img class="profile-image" [src]="user.profileImage" alt="Profilna slika" />
+
       <div class="profile-info">
-        <h2 class="username">korisnicko_ime</h2>
-        <p class="region">Region: Srbija</p>
-        <p class="bio">Ovde ide biografija korisnika.</p>
-        <p class="recipe-count">Broj recepata: 10</p>
+        <h2 class="username">{{ user.username }}</h2>
+        <p class="region">Region: {{ user.region }}</p>
+        @if (user.bio) {
+          <p class="bio">{{ user.bio }}</p>
+        }
+        <p class="recipe-count">Broj recepata: {{ user.recipeCount }}</p>
       </div>
     </div>
 
