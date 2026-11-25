@@ -5,9 +5,10 @@ import { AdminHome } from './admin-home/admin-home';
 import { Allergens } from './allergens/allergens';
 import { RecipeTypes } from './recipe-types/recipe-types';
 import { IngredientCategories } from './ingredient-categories/ingredient-categories';
+import { IngredientAllergens } from './ingredient-allergens/ingredient-allergens';
 
 @NgModule({
-  declarations: [AdminHome, Allergens, RecipeTypes, IngredientCategories],
+  declarations: [AdminHome, Allergens, RecipeTypes, IngredientCategories, IngredientAllergens],
   imports: [
     FormsModule,
     RouterModule.forChild([
@@ -15,6 +16,7 @@ import { IngredientCategories } from './ingredient-categories/ingredient-categor
       { path: 'allergens', component: Allergens },
       { path: 'recipe-types', component: RecipeTypes },
       { path: 'ingredient-categories', component: IngredientCategories },
+      { path: 'ingredient-allergens', component: IngredientAllergens },
     ]),
   ],
 })
