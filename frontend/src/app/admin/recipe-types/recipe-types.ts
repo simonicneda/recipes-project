@@ -115,6 +115,21 @@ export class RecipeTypes {
     this.resetForm();
   }
 
+  deleteType(name: string): void {
+    const names = this.selectedGroup.names;
+    const index = names.indexOf(name);
+
+    if (index === -1 || !window.confirm('Obrisati tip „' + name + '“?')) {
+      return;
+    }
+
+    names.splice(index, 1);
+    this.page = Math.min(this.page, this.pageCount);
+
+    if (this.editingName === name) {
+      this.resetForm();
+    }
+  }
   resetForm(): void {
     this.name = '';
     this.editingName = null;

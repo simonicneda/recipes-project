@@ -23,7 +23,16 @@ export class IngredientCategories {
     { id: 8, name: 'Orašasti plodovi' },
   ];
   private nextId = 9;
+  
+  readonly proposal = 'Mahunarke';
+  proposalSelected = false;
+  proposalAccepted = false;
 
+  useProposal(): void {
+    this.resetForm();
+    this.name = this.proposal;
+    this.proposalSelected = true;
+  }
   name = '';
   editingCategory: IngredientCategory | null = null;
   error = '';
@@ -63,9 +72,9 @@ export class IngredientCategories {
   }
 
   editCategory(category: IngredientCategory): void {
+    this.resetForm();
     this.editingCategory = category;
     this.name = category.name;
-    this.error = '';
   }
 
   saveCategory(): void {
@@ -96,7 +105,10 @@ export class IngredientCategories {
       this.nextId++;
       this.categories.push(savedCategory);
     }
-
+    
+    if (this.proposalSelected) {
+      this.proposalAccepted = true;
+    }
     this.search = '';
     const savedIndex = this.filteredCategories.indexOf(savedCategory);
     this.page = Math.floor(savedIndex / this.pageSize) + 1;
@@ -104,6 +116,7 @@ export class IngredientCategories {
   }
 
   resetForm(): void {
+    this.proposalSelected = false;
     this.name = '';
     this.editingCategory = null;
     this.error = '';
