@@ -48,7 +48,10 @@
       @for (name of visibleNames; track name) {
         <tr>
           <td>{{ name }}</td>
-          <td><button type="button" (click)="editType(name)">Izmeni</button></td>
+          <td>
+            <button type="button" (click)="editType(name)">Izmeni</button>
+            <button type="button" (click)="deleteType(name)">Obriši</button>
+          </td>
         </tr>
       } @empty {
         <tr><td colspan="2">Nema rezultata.</td></tr>
