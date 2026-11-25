@@ -1,0 +1,52 @@
+.recipe-types {
+  max-width: 640px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.groups, .pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.groups button[aria-pressed='true'] {
+  background: #263645;
+  color: white;
+}
+
+input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.55rem;
+  margin: 0.4rem 0 1rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+caption, th, td {
+  padding: 0.65rem;
+  text-align: left;
+}
+
+th, td {
+  border-bottom: 1px solid #ddd;
+}
+
+.type-form {
+  margin-bottom: 1.5rem;
+}
+
+.type-form button + button {
+  margin-left: 0.5rem;
+}
+
+.form-error {
+  color: #a51c30;
+}
