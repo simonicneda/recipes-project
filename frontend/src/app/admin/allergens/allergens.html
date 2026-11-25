@@ -1,0 +1,61 @@
+<section class="allergens">
+  <h1>Alergeni</h1>
+  <a routerLink="/admin">Nazad na administraciju</a>
+
+  <form (ngSubmit)="saveAllergen()">
+    <label for="allergen-name">Naziv alergena</label>
+    <input id="allergen-name" name="allergenName"
+           [(ngModel)]="name" (ngModelChange)="error = ''"
+           required [attr.aria-invalid]="error ? 'true' : null"
+           [attr.aria-describedby]="error ? 'allergen-error' : null">
+
+    @if (error) {
+      <p id="allergen-error" class="form-error" role="alert">{{ error }}</p>
+    }
+
+    <button type="submit">{{ editingId === null ? 'Dodaj' : 'Sačuvaj izmenu' }}</button>
+    @if (editingId !== null) {
+      <button type="button" (click)="resetForm()">Otkaži</button>
+    }
+  </form>
+
+  <label for="allergen-search">Pretraga po nazivu</label>
+  <input id="allergen-search" type="search" #searchInput
+         (input)="changeSearch(searchInput.value)">
+
+  <table>
+    <thead>
+      <tr>
+        <th scope="col" [attr.aria-sort]="ascending ? 'ascending' : 'descending'">
+          <button type="button" (click)="changeSort()">
+            Naziv {{ ascending ? '↑' : '↓' }}
+          </button>
+        </th>
+        <th scope="col">Radnje</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (allergen of visibleAllergens; track allergen.id) {
+        <tr>
+          <td>{{ allergen.name }}</td>
+          <td>
+            <button type="button" (click)="editAllergen(allergen)">Izmeni</button>
+            <button type="button" (click)="deleteAllergen(allergen)">Obriši</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="2">Nema rezultata.</td></tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button type="button" (click)="page = page - 1" [disabled]="page === 1">
+      Prethodna
+    </button>
+    <span>Strana {{ page }} od {{ pageCount }}</span>
+    <button type="button" (click)="page = page + 1" [disabled]="page >= pageCount">
+      Sledeća
+    </button>
+  </div>
+</section>

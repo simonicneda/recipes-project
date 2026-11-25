@@ -1,10 +1,15 @@
-import { NgModule } from '@angular/core';
+import { isDevMode, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Home } from './home/home/home';
 import { UserProfile } from './user-profile/user-profile/user-profile';
 import { EditProfile } from './user-profile/edit-profile/edit-profile';
 
 const routes: Routes = [
+  {
+  path: 'admin',
+  canMatch: [() => isDevMode()],
+  loadChildren: () => import('./admin/admin-module').then(module => module.AdminModule),
+  },
   {
     path:'',
     component: Home
