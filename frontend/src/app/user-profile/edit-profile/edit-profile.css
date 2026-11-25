@@ -84,3 +84,27 @@
   color: #666;
   text-decoration: none;
 }
+
+.image-preview {
+  margin-top: 12px;
+}
+
+.image-preview p {
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.image-preview img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #40bd78;
+}
+
+.field input[type="file"] {
+  cursor: pointer;
+  padding: 10px;
+  background-color: #f9f9f9;
+}

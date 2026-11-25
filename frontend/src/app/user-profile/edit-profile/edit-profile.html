@@ -2,6 +2,24 @@
   <div class="edit-card">
     <h2>Izmena profila</h2>
 
+
+    <div class="field">
+      <label for="profileImage">Profilna slika</label>
+
+      <input id="profileImage" type="file" (change)="onImageSelected($event)" />
+
+      @if (imageError()) {
+      <p class="error">{{ imageError() }}</p>
+      }
+
+      @if (imagePreview()) {
+      <div class="image-preview">
+        <p>Pregled izabrane slike:</p>
+        <img [src]="imagePreview()" alt="Pregled profilne slike" />
+      </div>
+      }
+    </div>
+
     <form (submit)="submit($event)">
       <div class="field">
         <label for="username">Korisničko ime</label>

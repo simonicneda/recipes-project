@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../user.model';
+import { UserProfileService } from '../user.profile.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -40,20 +41,23 @@ export class UserProfile implements OnInit {
     }
   ];
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private profileService: UserProfileService
+  ) { }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
 
       if (!id) {
-        this.user = this.myProfile;
+        this.user = this.profileService.getProfile();
         this.isOwnProfile = true;
         this.notFound = false;
         return;
       }
 
-      const found = this.otherProfiles.find(u => u.id === Number(id)); 
+      const found = this.otherProfiles.find(u => u.id === Number(id));
       this.isOwnProfile = false;
       this.user = found ?? null;  //ovo je ako ne nadje korisnika onda se prikazuje porukaa
       this.notFound = !found;
