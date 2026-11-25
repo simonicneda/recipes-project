@@ -1,9 +1,5 @@
-import { Component } from '@angular/core';
-
-interface Allergen {
-  id: number;
-  name: string;
-}
+import { Component, inject } from '@angular/core';
+import { Allergen, AllergenService } from './allergen.service';
 
 @Component({
   selector: 'app-allergens',
@@ -12,18 +8,14 @@ interface Allergen {
   styleUrl: './allergens.css',
 })
 export class Allergens {
-  private readonly allergens: Allergen[] = [
-    { id: 1, name: 'Mleko' },
-    { id: 2, name: 'Gluten' },
-    { id: 3, name: 'Kikiriki' },
-    { id: 4, name: 'Jaja' },
-    { id: 5, name: 'Soja' },
-    { id: 6, name: 'Susam' },
-  ];
+  private readonly allergenService = inject(AllergenService);
+
+  get allergens(): readonly Allergen[] {
+    return this.allergenService.allergens;
+  }
   name = '';
   editingId: number | null = null;
   error = '';
-  private nextId = 7;
   search = '';
   ascending = true;
   page = 1;
@@ -76,14 +68,9 @@ export class Allergens {
     return;
   }
 
-  if (this.editingId === null) {
-    this.allergens.push({ id: this.nextId, name });
-    this.nextId++;
-  } else {
-    const allergen = this.allergens.find(item => item.id === this.editingId);
-    if (allergen) {
-      allergen.name = name;
-    }
+  if (!this.allergenService.saveAllergen(this.editingId, name)) {
+    this.error = 'Čuvanje alergena nije uspelo.';
+    return;
   }
 
   this.page = Math.min(this.page, this.pageCount);
@@ -101,8 +88,12 @@ export class Allergens {
       return;
     }
 
-    const index = this.allergens.indexOf(allergen);
-    this.allergens.splice(index, 1);
+    if (!this.allergenService.deleteAllergen(allergen.id)) {
+      this.error = 'Brisanje alergena nije uspelo.';
+      return;
+    }
+
+    this.error = '';
     this.page = Math.min(this.page, this.pageCount);
 
     if (this.editingId === allergen.id) {

@@ -1,0 +1,36 @@
+<section class="ingredient-allergens">
+  <h1>Alergeni namirnica</h1>
+  <a routerLink="/admin">Nazad na administraciju</a>
+
+  <form (ngSubmit)="save()">
+    <label for="ingredient">Namirnica</label>
+    <select id="ingredient" name="ingredient" [ngModel]="ingredientId"
+            (ngModelChange)="selectIngredient($event)">
+      <option [ngValue]="null">Izaberi namirnicu</option>
+
+      @for (ingredient of allergenService.ingredients; track ingredient.id) {
+        <option [ngValue]="ingredient.id">{{ ingredient.name }}</option>
+      }
+    </select>
+
+    @if (ingredientId !== null) {
+      <fieldset>
+        <legend>Alergeni</legend>
+
+        @for (allergen of allergenService.allergens; track allergen.id) {
+          <label>
+            <input type="checkbox" #checkbox [checked]="selectedIds.includes(allergen.id)"
+                   (change)="toggleAllergen(allergen.id, checkbox.checked)">
+            {{ allergen.name }}
+          </label>
+        } @empty {
+          <p>Nema dostupnih alergena.</p>
+        }
+      </fieldset>
+
+      <button type="submit">Sačuvaj alergene</button>
+    }
+
+    <p role="status">{{ message }}</p>
+  </form>
+</section>
