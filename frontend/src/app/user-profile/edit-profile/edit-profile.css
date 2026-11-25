@@ -1,0 +1,86 @@
+.edit-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.edit-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.edit-card h2 {
+  margin: 0 0 20px 0;
+  color: #333;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.field label {
+  font-weight: 500;
+  color: #333;
+}
+
+.field input,
+.field textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.field textarea {
+  resize: none;
+}
+
+.counter {
+  align-self: flex-end;
+  color: #999;
+  font-size: 13px;
+}
+
+.field input:disabled {
+  background-color: #f0f0f0;
+  color: #888;
+  cursor: default;
+}
+
+
+.error {
+  color: #d9534f;
+  margin: 0;
+  font-size: 13px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.save-btn {
+  padding: 10px 20px;
+  border: none;
+  background: #40bd78;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.save-btn:disabled {
+  background: #b5dfc8;
+  cursor: not-allowed;
+}
+
+.cancel-btn {
+  color: #666;
+  text-decoration: none;
+}

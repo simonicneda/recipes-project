@@ -5,10 +5,12 @@ import { App } from './app';
 import { Home } from './home/home/home';
 import { Navbar } from './navbar/navbar';
 import { UserProfile } from './user-profile/user-profile/user-profile';
+import { EditProfile } from './user-profile/edit-profile/edit-profile';
+import { FormField } from '@angular/forms/signals';
 
 @NgModule({
-  declarations: [App, Home, Navbar, UserProfile],
-  imports: [BrowserModule, AppRoutingModule],
+  declarations: [App, Home, Navbar, UserProfile, EditProfile],
+  imports: [BrowserModule, AppRoutingModule,FormField],
   providers: [provideBrowserGlobalErrorListeners()],
   bootstrap: [App],
 })
