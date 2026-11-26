@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 interface RecipeTypeGroup {
   label: string;
   names: string[];
@@ -7,7 +7,8 @@ interface RecipeTypeGroup {
 
 @Component({
   selector: 'app-recipe-types',
-  standalone: false,
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './recipe-types.html',
   styleUrl: './recipe-types.css',
 })

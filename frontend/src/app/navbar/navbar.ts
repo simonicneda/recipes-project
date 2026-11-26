@@ -1,10 +1,11 @@
 import { Component, signal, inject, isDevMode } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DemoRoleService } from '../core/demo-role.service';
 
 @Component({
   selector: 'app-navbar',
-  standalone: false,
+  standalone: true,
+  imports:[RouterLink],
   styleUrl: './navbar.css',
   templateUrl: './navbar.html',
 })

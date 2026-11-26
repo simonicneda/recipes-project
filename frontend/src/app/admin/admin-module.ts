@@ -1,6 +1,8 @@
+
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+
 import { AdminHome } from './admin-home/admin-home';
 import { Allergens } from './allergens/allergens';
 import { RecipeTypes } from './recipe-types/recipe-types';
@@ -8,9 +10,13 @@ import { IngredientCategories } from './ingredient-categories/ingredient-categor
 import { IngredientAllergens } from './ingredient-allergens/ingredient-allergens';
 
 @NgModule({
-  declarations: [AdminHome, Allergens, RecipeTypes, IngredientCategories, IngredientAllergens],
   imports: [
     FormsModule,
+    AdminHome,
+    Allergens,
+    RecipeTypes,
+    IngredientCategories,
+    IngredientAllergens,
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: AdminHome },
       { path: 'allergens', component: Allergens },

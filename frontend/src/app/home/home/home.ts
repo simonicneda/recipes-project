@@ -1,9 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { RecipeService } from '../../recipe/recipes.service';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  standalone: false,
+  imports: [DecimalPipe],
+  standalone: true,
   styleUrl: './home.css',
   templateUrl: './home.html',
 })

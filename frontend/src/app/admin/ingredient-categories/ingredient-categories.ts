@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 interface IngredientCategory {
   id: number;
   name: string;
@@ -7,7 +7,8 @@ interface IngredientCategory {
 
 @Component({
   selector: 'app-ingredient-categories',
-  standalone: false,
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './ingredient-categories.html',
   styleUrl: './ingredient-categories.css',
 })

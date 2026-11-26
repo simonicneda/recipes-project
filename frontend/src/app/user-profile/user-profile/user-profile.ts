@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink  } from '@angular/router';
 import { User } from '../user.model';
 import { UserProfileService } from '../user.profile.service';
 
 @Component({
   selector: 'app-user-profile',
-  standalone: false,
+  standalone: true,
+  imports: [RouterLink],
   styleUrl: './user-profile.css',
   templateUrl: './user-profile.html',
 })

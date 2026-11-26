@@ -1,13 +1,14 @@
 import { Component, inject, signal, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router , RouterLink} from '@angular/router';
 import { disabled, form, maxLength, required } from '@angular/forms/signals';
 import { UserProfileService } from '../user.profile.service';
-
+import { FormField } from '@angular/forms/signals';
 const BIO_MAX_LENGTH = 500;
 
 @Component({
   selector: 'app-edit-profile',
-  standalone: false,
+  standalone: true,
+  imports: [FormField, RouterLink],
   templateUrl: './edit-profile.html',
   styleUrl: './edit-profile.css',
 })

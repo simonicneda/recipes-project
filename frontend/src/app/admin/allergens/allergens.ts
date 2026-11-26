@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { Allergen, AllergenService } from './allergen.service';
-
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-allergens',
-  standalone: false,
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './allergens.html',
   styleUrl: './allergens.css',
 })
