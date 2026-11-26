@@ -16,21 +16,21 @@
     <div class="recipe-selection">
         <label for="recipe-sort">Prikaži:</label>
 
-        <select id="recipe-sort" (change)="selected = $any($event.target).value">
+        <select id="recipe-sort" (change)="selected.set($any($event.target).value)">
             <option value="popular">Popularni recepti</option>
             <option value="latest">Najnoviji recepti</option>
         </select>
     </div>
 
-    @if (isLoading) {
+    @if (isLoading()) {
         <p class="loading-message">Ucitavanje recepata...</p>
     }
-    @else if (errorMessage) {
-        <p class="error-message">{{ errorMessage }}</p>
+    @else if (errorMessage()) {
+        <p class="error-message">{{ errorMessage() }}</p>
     }
     @else {
 
-        @if (selected === 'popular') {
+        @if (selected() === 'popular') {
             <section class="popular-section">
                 <div class="section-heading">
                     <div>
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="recipe-grid">
-                    @for(item of popularRecipes; track item.recipe.id){
+                    @for(item of popularRecipes(); track item.recipe.id){
                         <article class="recipe-card">
                             <div class="image-container">
                                 <img [src]="item.recipe.imageUrl" [alt]="item.recipe.name"/>
@@ -83,7 +83,7 @@
             </section>
         }
 
-        @if (selected === 'latest') {
+        @if (selected() === 'latest') {
             <section class="latest-section">
                 <div class="section-heading">
                     <div>
@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="recipe-grid">
-                    @for(item of latestRecipes; track item.id){
+                    @for(item of latestRecipes(); track item.id){
                         <article class="recipe-card">
                             <div class="image-container">
                                 <img [src]="item.imageUrl" [alt]="item.name"/>

@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
+import { Injectable , signal,computed} from "@angular/core";
 import { Recipe,PopularRecipe } from "./recipe.model";
 
 @Injectable({providedIn:'root'})
 export class RecipeService{
-    private recipes: Recipe[] = [
+    private readonly recipes= signal<Recipe[]>([
     {
       id: 1,
       name: 'Kremasta pasta sa pečurkama',
@@ -76,15 +76,15 @@ export class RecipeService{
         { userId: 2, value: 5, date: this.daysAgo(50) }
       ]
     }
-    ];
+    ]);
 
     private daysAgo(days: number): Date {
         return new Date(Date.now() - days * 24 * 60 * 60 * 1000);
     }
 
-    getPopularRecipes():PopularRecipe[]{
+    readonly popularRecipes=computed(()=>{
         const last30=this.daysAgo(30);
-        return this.recipes.map(recipe =>{
+        return this.recipes().map(recipe =>{
             const recentRatings=recipe.ratings.filter(rating => rating.date>=last30);
 
             if (recentRatings.length===0){return null;}
@@ -94,9 +94,9 @@ export class RecipeService{
             return {recipe, averageRating:total/recentRatings.length, ratingCount:recentRatings.length};
 
         }).filter((item):item is PopularRecipe => item!==null).sort((a,b) => b.averageRating-a.averageRating);
-    }
+    });
 
-    getLatestRecipes():Recipe[]{
-        return [...this.recipes].sort((a,b) => new Date(b.created).getTime() - new Date(a.created).getTime())
-    }
+    readonly latestRecipes=computed(()=>{
+        return [...this.recipes()].sort((a,b) => new Date(b.created).getTime() - new Date(a.created).getTime())
+    });
 }

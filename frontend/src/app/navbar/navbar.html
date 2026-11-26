@@ -3,15 +3,15 @@
 
     <button class="menu-button" (click)="toggleMenu()">☰</button>
 
-    <div class="nav-links" [class.open]="menuOpen">
+    <div class="nav-links" [class.open]="menuOpen()">
         @if(role==='user'){
-            <a routerLink="/" (click)="menuOpen = false">Početna</a>
-            <a routerLink="/recipes" (click)="menuOpen = false">Recepti</a>
-            <a routerLink="/favorites" (click)="menuOpen = false">Omiljeni</a>
-            <a routerLink="/profile" (click)="menuOpen = false">Profil</a>
+            <a routerLink="/" (click)="menuOpen.set(false)">Početna</a>
+            <a routerLink="/recipes" (click)="menuOpen.set(false)">Recepti</a>
+            <a routerLink="/favorites" (click)="menuOpen.set(false)">Omiljeni</a>
+            <a routerLink="/profile" (click)="menuOpen.set(false)">Profil</a>
         }
         @if(role==='admin'){
-            <a routerLink="/admin" (click)="menuOpen = false">Administracija</a>
+            <a routerLink="/admin" (click)="menuOpen.set(false)">Administracija</a>
         }
     </div>
 </nav>
