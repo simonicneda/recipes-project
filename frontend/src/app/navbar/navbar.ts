@@ -1,4 +1,4 @@
-import { Component, inject, isDevMode } from '@angular/core';
+import { Component, signal, inject, isDevMode } from '@angular/core';
 import { Router } from '@angular/router';
 import { DemoRoleService } from '../core/demo-role.service';
 
@@ -9,7 +9,7 @@ import { DemoRoleService } from '../core/demo-role.service';
   templateUrl: './navbar.html',
 })
 export class Navbar {
-  menuOpen=false;
+  menuOpen=signal(false);
   readonly role = inject(DemoRoleService).role;
   readonly demoMode = isDevMode();
   private readonly router = inject(Router);
@@ -28,6 +28,6 @@ export class Navbar {
   } 
 
   toggleMenu():void{
-    this.menuOpen=!this.menuOpen;
+    this.menuOpen.update(value=>!value);
   }
 }

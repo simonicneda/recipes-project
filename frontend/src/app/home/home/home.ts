@@ -1,5 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { PopularRecipe,Recipe } from '../../recipe/recipe.model';
+import { Component, inject, signal } from '@angular/core';
 import { RecipeService } from '../../recipe/recipes.service';
 
 @Component({
@@ -8,11 +7,25 @@ import { RecipeService } from '../../recipe/recipes.service';
   styleUrl: './home.css',
   templateUrl: './home.html',
 })
-export class Home{
-  private recipeService=inject(RecipeService);
-  
-  popularRecipes:PopularRecipe[]=this.recipeService.getPopularRecipes();
-  latestRecipes:Recipe[]=this.recipeService.getLatestRecipes();
+export class Home {
+  private recipeService = inject(RecipeService);
 
-  selected: 'popular'|'latest'='popular'
+  protected readonly popularRecipes = this.recipeService.popularRecipes;
+  protected readonly latestRecipes = this.recipeService.latestRecipes;
+
+  protected readonly selected = signal<'popular' | 'latest'>('popular');
+
+  protected readonly isLoading = signal(true);
+  protected readonly errorMessage = signal('');
+
+  constructor() {
+    try {
+      this.popularRecipes();
+      this.latestRecipes();
+    } catch (error) {
+      this.errorMessage.set('Greska pri ucitavanju recepata.');
+    } finally {
+      this.isLoading.set(false);
+    }
+  }
 }
