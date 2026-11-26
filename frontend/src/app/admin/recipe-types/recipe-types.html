@@ -1,0 +1,67 @@
+<section class="recipe-types">
+  <h1>Tipovi recepata</h1>
+  <a routerLink="/admin">Nazad na administraciju</a>
+
+  <div class="groups" role="group" aria-label="Grupa tipova recepata">
+    @for (group of groups; track group.label) {
+      <button type="button" [attr.aria-pressed]="selectedGroup === group"
+              (click)="selectGroup(group)">
+        {{ group.label }}
+      </button>
+    }
+  </div>
+
+  <form class="type-form" (ngSubmit)="saveType()">
+    <label for="recipe-type-name">Naziv tipa – {{ selectedGroup.label }}</label>
+    <input id="recipe-type-name" name="recipeTypeName"
+           [(ngModel)]="name" (ngModelChange)="error = ''" required
+           [attr.aria-invalid]="error ? 'true' : null"
+           [attr.aria-describedby]="error ? 'recipe-type-error' : null">
+
+    @if (error) {
+      <p id="recipe-type-error" class="form-error" role="alert">{{ error }}</p>
+    }
+
+    <button type="submit">{{ editingName === null ? 'Dodaj tip' : 'Sačuvaj izmenu' }}</button>
+
+    @if (editingName !== null) {
+      <button type="button" (click)="resetForm()">Otkaži</button>
+    }
+  </form>
+  <label for="recipe-type-search">Pretraga po nazivu</label>
+  <input id="recipe-type-search" type="search" #searchInput [value]="search"
+         (input)="changeSearch(searchInput.value)">
+
+  <table>
+    <caption>{{ selectedGroup.label }}</caption>
+    <thead>
+      <tr>
+        <th scope="col" [attr.aria-sort]="ascending ? 'ascending' : 'descending'">
+          <button type="button" (click)="changeSort()">
+            Naziv {{ ascending ? '↑' : '↓' }}
+          </button>
+        </th>
+        <th scope="col">Radnje</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (name of visibleNames; track name) {
+        <tr>
+          <td>{{ name }}</td>
+          <td>
+            <button type="button" (click)="editType(name)">Izmeni</button>
+            <button type="button" (click)="deleteType(name)">Obriši</button>
+          </td>
+        </tr>
+      } @empty {
+        <tr><td colspan="2">Nema rezultata.</td></tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <button type="button" (click)="page = page - 1" [disabled]="page === 1">Prethodna</button>
+    <span>Strana {{ page }} od {{ pageCount }}</span>
+    <button type="button" (click)="page = page + 1" [disabled]="page >= pageCount">Sledeća</button>
+  </div>
+</section>

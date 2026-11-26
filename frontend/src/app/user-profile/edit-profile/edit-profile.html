@@ -1,0 +1,57 @@
+<div class="edit-container">
+  <div class="edit-card">
+    <h2>Izmena profila</h2>
+
+
+    <div class="field">
+      <label for="profileImage">Profilna slika</label>
+
+      <input id="profileImage" type="file" (change)="onImageSelected($event)" />
+
+      @if (imageError()) {
+      <p class="error">{{ imageError() }}</p>
+      }
+
+      @if (imagePreview()) {
+      <div class="image-preview">
+        <p>Pregled izabrane slike:</p>
+        <img [src]="imagePreview()" alt="Pregled profilne slike" />
+      </div>
+      }
+    </div>
+
+    <form (submit)="submit($event)">
+      <div class="field">
+        <label for="username">Korisničko ime</label>
+        <input id="username" type="text" [formField]="form.username" />
+
+      </div>
+
+      <div class="field">
+        <label for="region">Region</label>
+        <input id="region" type="text" [formField]="form.region" />
+        @if (form.region().touched()) {
+        @for (error of form.region().errors(); track $index) {
+        <p class="error">{{ error.message }}</p>
+        }
+        }
+      </div>
+
+      <div class="field">
+        <label for="bio">Biografija (opciono)</label>
+        <textarea id="bio" rows="4" [formField]="form.bio"></textarea>
+        <small class="counter">{{ form.bio().value().length }} / {{ bioMax }}</small>
+        @if (form.bio().touched()) {
+        @for (error of form.bio().errors(); track $index) {
+        <p class="error">{{ error.message }}</p>
+        }
+        }
+      </div>
+
+      <div class="actions">
+        <button class="save-btn" type="submit" [disabled]="!form().valid()">Sačuvaj</button>
+        <a class="cancel-btn" routerLink="/profile">Odustani</a>
+      </div>
+    </form>
+  </div>
+</div>

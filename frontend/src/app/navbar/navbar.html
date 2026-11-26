@@ -13,5 +13,10 @@
         @if(role==='admin'){
             <a routerLink="/admin" (click)="menuOpen.set(false)">Administracija</a>
         }
+        @if (demoMode) {
+          <button type="button" (click)="switchDemoRole()">
+            Demo: {{ role() === 'admin' ? 'Pređi na korisnika' : 'Pređi na administratora' }}
+          </button>
+        }
     </div>
 </nav>

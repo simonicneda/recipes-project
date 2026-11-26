@@ -1,0 +1,89 @@
+.profile-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.profile-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.profile-header {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  padding: 30px;
+  border-bottom: 1px solid #eee;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #40bd78;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.username {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.region {
+  color: #666;
+  margin: 0;
+  font-size: 14px;
+}
+
+.bio {
+  color: #333;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.recipe-count {
+  color: #40bd78;
+  font-weight: 500;
+  margin: 0;
+}
+
+.profile-recipes {
+  padding: 25px 30px;
+}
+
+.profile-recipes h3 {
+  color: #333;
+  font-size: 18px;
+  margin: 0 0 15px 0;
+}
+
+.empty-message {
+  color: #999;
+  margin: 0;
+}
+
+.not-found {
+  text-align: center;
+  padding: 40px;
+}
+
+.edit-btn {
+  margin-top: 12px;
+  padding: 8px 16px;
+  border: 1px solid #40bd78;
+  background: white;
+  color: #40bd78;
+  border-radius: 6px;
+  cursor: pointer;
+}
