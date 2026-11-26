@@ -97,6 +97,6 @@ export class RecipeService{
     }
 
     getLatestRecipes():Recipe[]{
-        return this.recipes.sort((a,b) => new Date(b.created).getTime() - new Date(a.created).getTime())
+        return [...this.recipes].sort((a,b) => new Date(b.created).getTime() - new Date(a.created).getTime())
     }
 }

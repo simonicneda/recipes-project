@@ -10,9 +10,20 @@ import { RecipeService } from '../../recipe/recipes.service';
 })
 export class Home{
   private recipeService=inject(RecipeService);
-  
-  popularRecipes:PopularRecipe[]=this.recipeService.getPopularRecipes();
-  latestRecipes:Recipe[]=this.recipeService.getLatestRecipes();
-
+  popularRecipes:PopularRecipe[]=[];
+  latestRecipes:Recipe[]=[];
   selected: 'popular'|'latest'='popular'
+
+  errorMessage='';
+  isLoading=true;
+  constructor(){
+    try{
+      this.popularRecipes=this.recipeService.getPopularRecipes();
+      this.latestRecipes=this.recipeService.getLatestRecipes();
+    }catch(error){
+      this.errorMessage='Greska pri ucitavanju.';
+    }finally{
+      this.isLoading=false;
+    }
+  }
 }
