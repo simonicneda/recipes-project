@@ -1,3 +1,5 @@
+import { RecipeIngredient } from "../ingredient/recipe-ingredient";
+
 export interface Recipe {
   id: number;
   name: string;
@@ -11,6 +13,7 @@ export interface Recipe {
   preparationTime: number;
   imageUrl: string;
   ratings: RecipeRating[];
+  ingredients:RecipeIngredient[];
 }
 
 export interface RecipeRating {
