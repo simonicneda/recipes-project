@@ -4,13 +4,13 @@
     <button class="menu-button" (click)="toggleMenu()">☰</button>
 
     <div class="nav-links" [class.open]="menuOpen()">
-        @if(role==='user'){
+        @if(role()==='user'){
             <a routerLink="/" (click)="menuOpen.set(false)">Početna</a>
             <a routerLink="/recipes" (click)="menuOpen.set(false)">Recepti</a>
             <a routerLink="/favorites" (click)="menuOpen.set(false)">Omiljeni</a>
             <a routerLink="/profile" (click)="menuOpen.set(false)">Profil</a>
         }
-        @if(role==='admin'){
+        @if(role()==='admin'){
             <a routerLink="/admin" (click)="menuOpen.set(false)">Administracija</a>
         }
         @if (demoMode) {
