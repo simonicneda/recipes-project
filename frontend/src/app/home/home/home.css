@@ -235,6 +235,12 @@
 .recipe-selection select:focus {
     border-color: #40bd78;
 }
+.ingredients-section  {
+  padding: 55px 8%;
+}
+.search-results  {
+  padding: 55px 8%;
+}
 
 
 .loading-message,
@@ -253,7 +259,35 @@
     color: #777;
 }
 
+.recipe-search {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 30px auto;
+  padding: 0 20px;
+}
 
+.recipe-search input {
+  width: 100%;
+  max-width: 500px;
+  padding: 14px 20px;
+  border: 1px solid #dcdcdc;
+  border-radius: 25px;
+  background-color: #fff;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recipe-search input::placeholder {
+  color: #999;
+}
+
+.recipe-search input:focus {
+  border-color: #40bd78;
+  box-shadow: 0 0 0 3px rgba(64, 189, 120, 0.15);
+}
 
 @media (max-width: 600px) {
   .hero {

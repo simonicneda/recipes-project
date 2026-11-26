@@ -13,14 +13,25 @@
         </div>
     </section>
 
+    <div class="recipe-search">
+        <input
+            type="text"
+            placeholder="Pretraži recepte po nazivu..."
+            [value]="search()"
+            (input)="search.set($any($event.target).value)"
+        />
+    </div>
+
     <div class="recipe-selection">
         <label for="recipe-sort">Prikaži:</label>
 
-        <select id="recipe-sort" (change)="selected.set($any($event.target).value)">
+        <select id="recipe-sort" (change)="onRecipeSortChange($any($event.target).value)">
             <option value="popular">Popularni recepti</option>
             <option value="latest">Najnoviji recepti</option>
+            <option value="by_ingredients">Na osnovu dostupnih namirnica</option>
         </select>
     </div>
+
 
     @if (isLoading()) {
         <p class="loading-message">Ucitavanje recepata...</p>
@@ -29,6 +40,37 @@
         <p class="error-message">{{ errorMessage() }}</p>
     }
     @else {
+        @if (search().trim()) {
+            <section class="search-results">
+                <div class="section-heading">
+                <h2>Rezultati pretrage</h2>
+                </div>
+
+                <div class="recipe-grid">
+                @for (item of searchResults(); track item.id) {
+                    <article class="recipe-card">
+                    <div class="image-container">
+                        <img [src]="item.imageUrl" [alt]="item.name"/>
+                        <span class="meal-badge">{{ item.mealType }}</span>
+                    </div>
+
+                    <div class="recipe-content">
+                        <h3>{{ item.name }}</h3>
+                        <p class="author">Autor: {{ item.author }}</p>
+                        <div class="recipe-details">
+                        <span>◷ {{ item.preparationTime }} min</span>
+                        <span>♙ {{ item.servings }} porcija</span>
+                        </div>
+                    </div>
+                    </article>
+                } @empty {
+                    <p class="empty-message">
+                    Nema recepata koji odgovaraju pretrazi.
+                    </p>
+                }
+                </div>
+            </section>
+        }
 
         @if (selected() === 'popular') {
             <section class="popular-section">
@@ -118,6 +160,53 @@
 
                                 <div class="allergens">
                                     @for (allergen of item.allergens; track allergen) {
+                                        <span>{{ allergen }}</span>
+                                    }
+                                </div>
+
+                            </div>
+                        </article>
+                    }@empty{
+                        <p class="empty-message">Trenutno nema recepata.</p>
+                    }
+                </div>
+            </section>
+        }
+
+        @if (selected() === 'by_ingredients') {
+            <section class="ingredients-section">
+                <div class="section-heading">
+                    <div>
+                        <h2>Recepti po dostupnim namirnicama</h2>
+                    </div>
+                </div>
+
+                <div class="recipe-grid">
+                    @for(item of ingredientRecipes(); track item.recipe.id){
+                        <article class="recipe-card">
+                            <div class="image-container">
+                                <img [src]="item.recipe.imageUrl" [alt]="item.recipe.name"/>
+
+                                <span class="meal-badge">{{item.recipe.mealType}}</span>
+                            </div>
+
+                            <div class="recipe-content">
+                                <div class="recipe-meta">
+                                    <span>{{ item.recipe.dishType }}</span>
+                                    <span>{{ item.recipe.dietType }}</span>
+                                </div>
+
+                                <h3>{{ item.recipe.name }}</h3>
+
+                                <p class="author">Autor: {{ item.recipe.author }}</p>
+
+                                <div class="recipe-details">
+                                    <span>◷ {{ item.recipe.preparationTime }} min</span>
+                                    <span>♙ {{ item.recipe.servings }} porcija</span>
+                                </div>
+
+                                <div class="allergens">
+                                    @for (allergen of item.recipe.allergens; track allergen) {
                                         <span>{{ allergen }}</span>
                                     }
                                 </div>
